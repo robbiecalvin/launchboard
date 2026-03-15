@@ -1,0 +1,39 @@
+<% content_for :title, "#{@company.name} | Launchboard Admin" %>
+
+<section class="section">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow"><%= @company.industry %></p>
+      <h1><%= @company.name %></h1>
+    </div>
+    <div class="inline-links">
+      <%= link_to "Edit", edit_admin_company_path(@company), class: "text-link" %>
+      <%= button_to "Delete", admin_company_path(@company), method: :delete, class: "button-link", form: { data: { turbo_confirm: "Delete this company and all of its jobs?" } } %>
+    </div>
+  </div>
+
+  <p class="lede"><%= @company.description %></p>
+
+  <div class="detail-metadata">
+    <span><%= @company.location %></span>
+    <% if @company.website.present? %>
+      <span><%= link_to @company.website, @company.website, target: "_blank", rel: "noreferrer" %></span>
+    <% end %>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Openings</p>
+      <h2><%= pluralize(@jobs.count, "job") %> attached to this company</h2>
+    </div>
+    <%= link_to "Add job", new_admin_job_path(job: { company_id: @company.id }), class: "button button--secondary" %>
+  </div>
+
+  <div class="job-grid">
+    <% @jobs.each do |job| %>
+      <%= render "jobs/job_card", job: job %>
+    <% end %>
+  </div>
+</section>

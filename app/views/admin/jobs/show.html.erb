@@ -1,0 +1,62 @@
+<% content_for :title, "#{@job.title} | Launchboard Admin" %>
+
+<section class="section">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow"><%= @job.company.name %></p>
+      <h1><%= @job.title %></h1>
+    </div>
+    <div class="inline-links">
+      <%= link_to "Edit", edit_admin_job_path(@job), class: "text-link" %>
+      <%= link_to "Public listing", job_path(@job), class: "text-link" if @job.published? %>
+      <%= button_to "Delete", admin_job_path(@job), method: :delete, class: "button-link", form: { data: { turbo_confirm: "Delete this job?" } } %>
+    </div>
+  </div>
+
+  <div class="detail-metadata">
+    <span><%= @job.location %></span>
+    <span><%= @job.employment_type %></span>
+    <span><%= @job.status.humanize %></span>
+    <span><%= @job.remote_label %></span>
+    <% if @job.salary_range.present? %>
+      <span><%= @job.salary_range %></span>
+    <% end %>
+  </div>
+
+  <p class="lede"><%= @job.summary %></p>
+  <div class="rich-text">
+    <p><%= @job.description %></p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Applications</p>
+      <h2><%= pluralize(@applications.count, "candidate") %></h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @applications.each do |application| %>
+          <tr>
+            <td><%= application.candidate_name %></td>
+            <td><%= mail_to application.email %></td>
+            <td><%= application.status.humanize %></td>
+            <td><%= application.created_at.to_fs(:long) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

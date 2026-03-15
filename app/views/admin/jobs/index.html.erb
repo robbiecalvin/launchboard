@@ -1,0 +1,36 @@
+<% content_for :title, "Jobs | Launchboard Admin" %>
+
+<section class="section">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Admin</p>
+      <h1>Jobs</h1>
+    </div>
+    <%= link_to "Post job", new_admin_job_path, class: "button button--primary" %>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Company</th>
+          <th>Status</th>
+          <th>Applications</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @jobs.each do |job| %>
+          <tr>
+            <td><%= job.title %></td>
+            <td><%= job.company.name %></td>
+            <td><%= job.status.humanize %></td>
+            <td><%= job.job_applications.size %></td>
+            <td><%= link_to "View", admin_job_path(job), class: "text-link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

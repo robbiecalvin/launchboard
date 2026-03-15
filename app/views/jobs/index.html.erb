@@ -1,0 +1,32 @@
+<% content_for :title, "Open roles | Launchboard" %>
+
+<section class="section">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Browse jobs</p>
+      <h1>Open roles</h1>
+    </div>
+    <p class="muted"><%= pluralize(@jobs.count, "role") %> matched the current filters.</p>
+  </div>
+
+  <%= form_with url: jobs_path, method: :get, class: "filters", local: true do |form| %>
+    <%= form.text_field :q, value: @filters["q"], placeholder: "Search title, company, or summary" %>
+    <%= form.select :location, options_for_select([["All locations", ""]] + @locations.map { |location| [location, location] }, @filters["location"]) %>
+    <%= form.select :company_id, options_for_select([["All companies", ""]] + @companies.map { |company| [company.name, company.id] }, @filters["company_id"]) %>
+    <label class="checkbox">
+      <%= form.check_box :remote, { checked: @filters["remote"] == "1" }, "1", "" %>
+      Remote only
+    </label>
+    <%= form.submit "Filter", class: "button button--primary" %>
+  <% end %>
+
+  <div class="job-grid">
+    <% @jobs.each do |job| %>
+      <%= render "job_card", job: job %>
+    <% end %>
+  </div>
+
+  <% if @jobs.empty? %>
+    <p class="empty-state">No jobs matched those filters. Try a broader search.</p>
+  <% end %>
+</section>

@@ -1,0 +1,30 @@
+<% content_for :title, "Companies | Launchboard Admin" %>
+
+<section class="section">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Admin</p>
+      <h1>Companies</h1>
+    </div>
+    <%= link_to "New company", new_admin_company_path, class: "button button--primary" %>
+  </div>
+
+  <div class="job-grid">
+    <% @companies.each do |company| %>
+      <article class="job-card">
+        <div class="job-card__meta">
+          <span class="pill"><%= company.industry %></span>
+          <span class="pill"><%= pluralize(company.open_roles_count, "open role") %></span>
+        </div>
+        <h3><%= link_to company.name, admin_company_path(company), class: "job-card__title" %></h3>
+        <p class="job-card__summary"><%= company.description %></p>
+        <div class="job-card__footer">
+          <span><%= company.location %></span>
+          <% if company.website.present? %>
+            <span><%= company.website %></span>
+          <% end %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</section>

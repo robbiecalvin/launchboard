@@ -1,0 +1,62 @@
+<% content_for :title, "Launchboard | Rails job board demo" %>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Mini Rails portfolio project</p>
+    <h1>Find a small-team Rails job worth building for</h1>
+    <p class="hero__copy">
+      Launchboard is a compact hiring marketplace for product teams that want Rails developers who care about maintainable software.
+    </p>
+    <div class="hero__actions">
+      <%= link_to "Browse open roles", jobs_path, class: "button button--primary" %>
+      <%= link_to "Open admin demo", admin_root_path, class: "button button--secondary" %>
+    </div>
+    <p class="hero__note">Admin demo credentials default to <code>admin</code> / <code>launchboard-demo</code>.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span>Companies</span>
+      <strong><%= @stats[:companies] %></strong>
+    </div>
+    <div class="stat-card">
+      <span>Open roles</span>
+      <strong><%= @stats[:open_roles] %></strong>
+    </div>
+    <div class="stat-card">
+      <span>Applications</span>
+      <strong><%= @stats[:applications] %></strong>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Featured roles</p>
+      <h2>Good teams, clear scopes, realistic Rails work</h2>
+    </div>
+    <%= link_to "See all jobs", jobs_path, class: "text-link" %>
+  </div>
+
+  <div class="job-grid">
+    <% @featured_jobs.each do |job| %>
+      <%= render "jobs/job_card", job: job %>
+    <% end %>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Recently posted</p>
+      <h2>Fresh openings</h2>
+    </div>
+  </div>
+
+  <div class="job-grid">
+    <% @latest_jobs.each do |job| %>
+      <%= render "jobs/job_card", job: job %>
+    <% end %>
+  </div>
+</section>

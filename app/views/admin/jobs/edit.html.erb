@@ -1,0 +1,13 @@
+<h1>Admin::Jobs#edit</h1>
+<% content_for :title, "Edit job | Launchboard Admin" %>
+
+<section class="section section--narrow">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Admin</p>
+      <h1>Edit <%= @job.title %></h1>
+    </div>
+  </div>
+
+  <%= render "form", job: @job %>
+</section>

@@ -1,0 +1,25 @@
+one:
+  company: one
+  title: Rails Product Engineer
+  location: Vancouver, BC
+  employment_type: Full-time
+  salary_range: $105k - $130k
+  status: 1
+  remote: true
+  summary: Build product features with close design collaboration.
+  description: Own features end-to-end and keep the codebase maintainable.
+  featured: true
+  posted_on: 2026-03-10
+
+two:
+  company: two
+  title: Full-Stack Rails Developer
+  location: Seattle, WA
+  employment_type: Full-time
+  salary_range: $120k - $145k
+  status: 1
+  remote: false
+  summary: Build internal tools for healthcare teams.
+  description: Improve high-trust, form-heavy workflows with plain Rails.
+  featured: false
+  posted_on: 2026-03-09

@@ -1,0 +1,13 @@
+<h1>Admin::Companies#edit</h1>
+<% content_for :title, "Edit company | Launchboard Admin" %>
+
+<section class="section section--narrow">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Admin</p>
+      <h1>Edit <%= @company.name %></h1>
+    </div>
+  </div>
+
+  <%= render "form", company: @company %>
+</section>

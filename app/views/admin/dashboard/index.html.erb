@@ -1,0 +1,61 @@
+<% content_for :title, "Admin dashboard | Launchboard" %>
+
+<section class="section">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Admin</p>
+      <h1>Hiring dashboard</h1>
+    </div>
+    <div class="inline-links">
+      <%= link_to "Manage companies", admin_companies_path, class: "text-link" %>
+      <%= link_to "Manage jobs", admin_jobs_path, class: "text-link" %>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span>Companies</span>
+      <strong><%= @company_count %></strong>
+    </div>
+    <div class="stat-card">
+      <span>Published jobs</span>
+      <strong><%= @published_jobs_count %></strong>
+    </div>
+    <div class="stat-card">
+      <span>Applications</span>
+      <strong><%= @application_count %></strong>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="section__header">
+    <div>
+      <p class="eyebrow">Recent applications</p>
+      <h2>Candidate pipeline</h2>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Job</th>
+          <th>Status</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recent_applications.each do |application| %>
+          <tr>
+            <td><%= application.candidate_name %></td>
+            <td><%= "#{application.job.title} at #{application.job.company.name}" %></td>
+            <td><%= application.status.humanize %></td>
+            <td><%= application.created_at.to_fs(:long) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

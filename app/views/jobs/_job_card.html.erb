@@ -1,0 +1,20 @@
+<article class="job-card">
+  <div class="job-card__meta">
+    <span class="pill"><%= job.company.name %></span>
+    <% if job.featured? %>
+      <span class="pill pill--accent">Featured</span>
+    <% end %>
+  </div>
+
+  <h3><%= link_to job.title, job_path(job), class: "job-card__title" %></h3>
+  <p class="job-card__summary"><%= job.summary %></p>
+
+  <div class="job-card__footer">
+    <span><%= job.location %></span>
+    <span><%= job.employment_type %></span>
+    <span><%= job.remote_label %></span>
+    <% if job.salary_range.present? %>
+      <span><%= job.salary_range %></span>
+    <% end %>
+  </div>
+</article>

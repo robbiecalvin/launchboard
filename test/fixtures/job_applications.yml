@@ -1,0 +1,17 @@
+one:
+  job: one
+  candidate_name: Alex Applicant
+  email: alex@example.com
+  portfolio_url: https://alex.example.com
+  resume_url: https://alex.example.com/resume
+  cover_letter: I enjoy working in small Rails teams.
+  status: 0
+
+two:
+  job: two
+  candidate_name: Jamie Candidate
+  email: jamie@example.com
+  portfolio_url: https://jamie.example.com
+  resume_url: https://jamie.example.com/resume
+  cover_letter: I like untangling operational software.
+  status: 1

@@ -1,0 +1,29 @@
+<%= form_with model: [:admin, company], class: "stacked-form", local: true do |form| %>
+  <% if company.errors.any? %>
+    <div class="form-errors">
+      <p>Please fix the errors below:</p>
+      <ul>
+        <% company.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :location %>
+  <%= form.text_field :location %>
+
+  <%= form.label :industry %>
+  <%= form.text_field :industry %>
+
+  <%= form.label :website %>
+  <%= form.url_field :website, placeholder: "https://company.example.com" %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description, rows: 6 %>
+
+  <%= form.submit class: "button button--primary" %>
+<% end %>

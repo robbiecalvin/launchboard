@@ -1,0 +1,15 @@
+one:
+  name: Northstar Studio
+  slug: northstar-studio
+  location: Vancouver, BC
+  website: https://northstar.example.com
+  industry: Product Design
+  description: Strategy and product design studio.
+
+two:
+  name: Harbor Health
+  slug: harbor-health
+  location: Seattle, WA
+  website: https://harborhealth.example.com
+  industry: Health Tech
+  description: Clinic operations software.

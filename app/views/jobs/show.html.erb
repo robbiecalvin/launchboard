@@ -1,0 +1,85 @@
+<% content_for :title, "#{@job.title} | Launchboard" %>
+
+<section class="job-detail">
+  <div class="job-detail__main">
+    <p class="eyebrow"><%= @job.company.name %></p>
+    <h1><%= @job.title %></h1>
+    <div class="detail-metadata">
+      <span><%= @job.location %></span>
+      <span><%= @job.employment_type %></span>
+      <span><%= @job.remote_label %></span>
+      <% if @job.salary_range.present? %>
+        <span><%= @job.salary_range %></span>
+      <% end %>
+      <span>Posted <%= @job.posted_on.to_fs(:long) %></span>
+    </div>
+
+    <p class="lede"><%= @job.summary %></p>
+
+    <div class="rich-text">
+      <p><%= @job.description %></p>
+    </div>
+
+    <section class="company-panel">
+      <h2>About <%= @job.company.name %></h2>
+      <p><%= @job.company.description %></p>
+      <p><strong>Industry:</strong> <%= @job.company.industry %></p>
+      <p><strong>Location:</strong> <%= @job.company.location %></p>
+      <% if @job.company.website.present? %>
+        <p><strong>Website:</strong> <%= link_to @job.company.website, @job.company.website, target: "_blank", rel: "noreferrer" %></p>
+      <% end %>
+    </section>
+  </div>
+
+  <aside class="job-detail__sidebar">
+    <section class="application-panel">
+      <h2>Apply now</h2>
+      <%= form_with model: [@job, @job_application], class: "stacked-form", local: true do |form| %>
+        <% if @job_application.errors.any? %>
+          <div class="form-errors">
+            <p>Please fix the errors below:</p>
+            <ul>
+              <% @job_application.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= form.label :candidate_name, "Name" %>
+        <%= form.text_field :candidate_name %>
+
+        <%= form.label :email %>
+        <%= form.email_field :email %>
+
+        <%= form.label :portfolio_url, "Portfolio URL" %>
+        <%= form.url_field :portfolio_url, placeholder: "https://portfolio.example.com" %>
+
+        <%= form.label :resume_url, "Resume URL" %>
+        <%= form.url_field :resume_url, placeholder: "https://resume.example.com" %>
+
+        <%= form.label :cover_letter %>
+        <%= form.text_area :cover_letter, rows: 7 %>
+
+        <%= form.submit "Send application", class: "button button--primary button--full" %>
+      <% end %>
+    </section>
+  </aside>
+</section>
+
+<% if @related_jobs.any? %>
+  <section class="section section--tight">
+    <div class="section__header">
+      <div>
+        <p class="eyebrow">More from this company</p>
+        <h2>Related roles</h2>
+      </div>
+    </div>
+
+    <div class="job-grid">
+      <% @related_jobs.each do |job| %>
+        <%= render "job_card", job: job %>
+      <% end %>
+    </div>
+  </section>
+<% end %>

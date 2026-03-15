@@ -1,0 +1,51 @@
+<%= form_with model: [:admin, job], class: "stacked-form", local: true do |form| %>
+  <% if job.errors.any? %>
+    <div class="form-errors">
+      <p>Please fix the errors below:</p>
+      <ul>
+        <% job.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.label :company_id, "Company" %>
+  <%= form.collection_select :company_id, Company.alphabetical, :id, :name %>
+
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :location %>
+  <%= form.text_field :location %>
+
+  <%= form.label :employment_type %>
+  <%= form.select :employment_type, ["Full-time", "Part-time", "Contract", "Internship"] %>
+
+  <%= form.label :salary_range %>
+  <%= form.text_field :salary_range %>
+
+  <%= form.label :status %>
+  <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] } %>
+
+  <label class="checkbox">
+    <%= form.check_box :remote %>
+    Remote-friendly
+  </label>
+
+  <label class="checkbox">
+    <%= form.check_box :featured %>
+    Featured listing
+  </label>
+
+  <%= form.label :posted_on %>
+  <%= form.date_field :posted_on %>
+
+  <%= form.label :summary %>
+  <%= form.text_area :summary, rows: 3 %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description, rows: 8 %>
+
+  <%= form.submit class: "button button--primary" %>
+<% end %>
