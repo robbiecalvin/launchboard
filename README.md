@@ -97,3 +97,7 @@ This app is intentionally small, but it shows the Rails fundamentals that matter
 - Richer application review workflow
 - File uploads for resumes
 - Deploy to Render, Fly.io, or Heroku-style hosting
+
+## Portfolio and verification
+
+The Rails application includes controller tests and fixtures for companies, jobs and applications. Run `bin/rails test` in a configured local environment. Replace the documented demo credentials before exposing any administrative interface publicly; test results and production readiness are not asserted here.
